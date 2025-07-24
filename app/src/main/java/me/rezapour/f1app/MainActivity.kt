@@ -11,7 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import me.rezapour.f1app.ui.MainViewModel
 import me.rezapour.f1app.ui.theme.F1AppTheme
 
 @AndroidEntryPoint
@@ -21,6 +23,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             F1AppTheme {
+
+                val viewmodel: MainViewModel = hiltViewModel()
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
                         name = "Android",

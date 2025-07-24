@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "F1App"
 include(":app")
+include(":core:network")

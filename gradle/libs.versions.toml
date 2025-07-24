@@ -8,8 +8,21 @@ espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.9.1"
 activityCompose = "1.10.1"
 composeBom = "2024.09.00"
+appcompat = "1.7.1"
+material = "1.12.0"
 kspVersion = "2.0.21-1.0.27"
 daggerHiltVersion = "2.56.2"
+retrofitVersion = "3.0.0"
+gsonVersion = "2.13.1"
+kotlinxCoroutines = "1.10.1"
+okhttpVersion = "4.12.0"
+okhttpMockVersion = "4.12.0"
+truthVersion = "1.4.4"
+mockkVersion = "1.13.7"
+kotlinTestJunit = "1.9.24"
+junit5 = "5.10.0"
+junit5plugin = "1.9.3.0"
+assertj = "3.24.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -26,10 +39,35 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+junit5-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit5" }
+junit5-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit5" }
+junit5-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit5" }
+assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+
+#network
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gsonVersion" }
+gson-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
+okhttp-mock-server = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okhttpMockVersion" }
 
 #dagger
 dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHiltVersion" }
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "daggerHiltVersion" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+#test
+truth = { group = "com.google.truth", name = "truth", version.ref = "truthVersion" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockkVersion" }
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlinTestJunit" }
+
+
+#corotines
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -37,4 +75,26 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "daggerHiltVersion" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "junit5plugin" }
 
+[bundles]
+network = [
+    "retrofit",
+    "gson",
+    "gson-converter",
+    "okhttp",
+    "okhttp-logging-interceptor",
+    "okhttp-mock-server"
+]
+
+coroutines = [
+    "kotlinx-coroutines-core",
+    "kotlinx-coroutines-android"
+]
+
+junit5 = [
+    "junit5-api",
+    "junit5-params",
+    "assertj-core"
+]
