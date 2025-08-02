@@ -6,26 +6,24 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import me.rezapour.network.ApiProvider
+import me.rezapour.domain.usecase.DriverUseCase
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(apiProvider: ApiProvider) : ViewModel() {
+class MainViewModel @Inject constructor(private val driverUseCase: DriverUseCase) : ViewModel() {
 
 
     init {
-
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val result = apiProvider.getDrivers(0, 10)
-                Log.d("MO", result.mRData?.driverTable!!.drivers[0]!!.givenName!!)
+                val result = driverUseCase()
             } catch (e: Exception) {
                 Log.d("MO", e.message.toString())
             }
 
+            driverUseCase.driversFlow.collect {
+                Log.d("MO", it.toString())
+            }
         }
-
-
     }
-
 }

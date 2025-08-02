@@ -5,7 +5,7 @@ import com.google.common.io.Resources
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import me.rezapour.network.ApiProvider
-import me.rezapour.network.NetworkError
+import me.rezapour.network.NetworkException
 import me.rezapour.network.retrofit.ApiService
 import me.rezapour.network.retrofit.client.RetrofitClient
 import me.rezapour.network.test_models.expectedDriverListFromJson
@@ -69,7 +69,7 @@ class ApiProviderRetrofitImplTest {
             .setBody("1")
         mockWebServer.enqueue(response)
 
-        assertThrows<NetworkError.BodyIsCorrupted> {
+        assertThrows<NetworkException.BodyIsCorrupted> {
             apiProvider.getDrivers(0, 0)
         }
 
@@ -83,7 +83,7 @@ class ApiProviderRetrofitImplTest {
 
         mockWebServer.enqueue(response)
 
-        assertThrows<NetworkError.Unauthorised> {
+        assertThrows<NetworkException.Unauthorised> {
             apiProvider.getDrivers(0,0)
         }
     }
@@ -96,7 +96,7 @@ class ApiProviderRetrofitImplTest {
 
         mockWebServer.enqueue(response)
 
-        assertThrows<NetworkError.HttpError> {
+        assertThrows<NetworkException.HttpError> {
             apiProvider.getDrivers(0,0)
         }
     }

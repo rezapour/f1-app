@@ -10,5 +10,4 @@ class ApiProviderRetrofitImpl @Inject constructor(private val api: ApiService) :
         safeApiCall {
             api.getDrivers(offset = offset, limit = limit)
         }
-
 }

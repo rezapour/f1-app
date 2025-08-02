@@ -1,7 +1,7 @@
 package me.rezapour.network.impl
 
 import com.google.gson.JsonSyntaxException
-import me.rezapour.network.NetworkError
+import me.rezapour.network.NetworkException
 import retrofit2.HttpException
 
 inline fun <T> safeApiCall(block: () -> T): T {
@@ -9,12 +9,12 @@ inline fun <T> safeApiCall(block: () -> T): T {
         return block()
     } catch (e: HttpException) {
         throw when (e.code()) {
-            401 -> NetworkError.Unauthorised()
-            else -> NetworkError.HttpError(e.code())
+            401 -> NetworkException.Unauthorised()
+            else -> NetworkException.HttpError(e.code())
         }
     } catch (e: JsonSyntaxException) {
-        throw NetworkError.BodyIsCorrupted()
+        throw NetworkException.BodyIsCorrupted()
     } catch (e: Exception) {
-        throw NetworkError.NoInternet(e)
+        throw NetworkException.NoInternet(e)
     }
 }

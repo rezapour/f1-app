@@ -1,23 +1,20 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.junit5)
 }
 
 android {
-    namespace = "me.rezapour.f1app"
+    namespace = "me.rezapour.data"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "me.rezapour.f1app"
         minSdk = 24
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -36,35 +33,30 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        compose = true
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
     }
 }
 
 dependencies {
-
-    implementation(project(":core:di"))
+    implementation(project(":core:network"))
     implementation(project(":core:domain"))
+    implementation(project(":core:common"))
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
+    implementation(libs.androidx.appcompat)
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
-
 
     //dagger
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.compiler)
 
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    //coroutines
+    implementation(libs.bundles.coroutines)
+    testImplementation(libs.kotlinx.coroutines.test)
+
+    testImplementation(libs.bundles.junit5)
+    testRuntimeOnly(libs.junit5.engine)
 }

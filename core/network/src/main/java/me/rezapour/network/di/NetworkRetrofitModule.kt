@@ -24,5 +24,5 @@ class NetworkRetrofitModule {
     @Provides
     fun provideNetworkApiService(retrofit: Retrofit): ApiService =
         retrofit.create(ApiService::class.java)
-
 }
+
