@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import me.rezapour.designsystem.theme.F1AppTheme
 import me.rezapour.f1app.ui.MainViewModel
-import me.rezapour.f1app.ui.theme.F1AppTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
