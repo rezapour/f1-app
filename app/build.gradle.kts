@@ -43,6 +43,11 @@ android {
 
 dependencies {
 
+    implementation(project(":core:di"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:designsystem"))
+    implementation(project(":feature:drivers"))
+    implementation(project(":feature:constructors"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -63,4 +68,7 @@ dependencies {
     //dagger
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.compiler)
+
+    //navigation
+    implementation(libs.bundles.navigation)
 }
