@@ -35,7 +35,6 @@ object RetrofitClient {
 
     private fun provideGsonBuilder(): Gson {
         return GsonBuilder()
-            .excludeFieldsWithoutExposeAnnotation()
             .create()
     }
 

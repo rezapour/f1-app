@@ -7,12 +7,12 @@ import javax.inject.Inject
 class DriverNetworkMapper @Inject constructor() : Mapper<DriversNetworkEntity, DriverDomain> {
     override fun map(input: DriversNetworkEntity): DriverDomain =
         DriverDomain(
-            driverId = input.driverId,
-            url = input.url,
-            givenName = input.givenName,
-            familyName = input.familyName,
-            dateOfBirth = input.dateOfBirth,
-            nationality = input.nationality
+            driverId = requireNotNull(input.driverId) { "driverId cannot be null" },
+            url = input.url ?: "",
+            givenName = input.givenName ?: "Unknown",
+            familyName = input.familyName ?: "Unknown",
+            dateOfBirth = input.dateOfBirth ?: "",
+            nationality = input.nationality ?: ""
         )
 
 

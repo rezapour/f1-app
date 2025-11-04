@@ -1,23 +1,21 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.junit5)
 }
 
 android {
-    namespace = "me.rezapour.f1app"
+    namespace = "me.rezapour.constructors"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "me.rezapour.f1app"
         minSdk = 24
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -36,6 +34,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
     }
@@ -43,11 +42,9 @@ android {
 
 dependencies {
 
-    implementation(project(":core:di"))
     implementation(project(":core:domain"))
     implementation(project(":core:designsystem"))
-    implementation(project(":feature:drivers"))
-    implementation(project(":feature:constructors"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -64,10 +61,16 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-
     //dagger
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.compiler)
+
+    //coroutines
+    implementation(libs.bundles.coroutines)
+    testImplementation(libs.kotlinx.coroutines.test)
+
+    testImplementation(libs.bundles.junit5)
+    testRuntimeOnly(libs.junit5.engine)
 
     //navigation
     implementation(libs.bundles.navigation)

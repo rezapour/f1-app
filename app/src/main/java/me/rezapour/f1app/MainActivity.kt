@@ -4,17 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import me.rezapour.constructors.navigation.constructorsNavGraph
 import me.rezapour.designsystem.theme.F1AppTheme
-import me.rezapour.f1app.ui.MainViewModel
+import me.rezapour.drivers.navigation.DriverRoute
+import me.rezapour.drivers.navigation.driverNavGraph
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -23,31 +19,16 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             F1AppTheme {
+                val nav = rememberNavController()
 
-                val viewmodel: MainViewModel = hiltViewModel()
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                NavHost(navController = nav, startDestination = DriverRoute.List.route) {
+
+                    driverNavGraph(nav)
+                    constructorsNavGraph(nav)
+
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    F1AppTheme {
-        Greeting("Android")
-    }
-}
