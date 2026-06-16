@@ -1,6 +1,6 @@
 package me.rezapour.domain.models
 
-data class DriverDomain(
+data class Driver(
     val driverId: String,
     val url: String,
     val givenName: String,

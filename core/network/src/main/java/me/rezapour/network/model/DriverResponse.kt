@@ -2,25 +2,25 @@ package me.rezapour.network.model
 
 import com.google.gson.annotations.SerializedName
 
-data class DriverListNetworkEntity(
-    @SerializedName("MRData") var mRData: MRDataNetworkEntity? = MRDataNetworkEntity()
+data class DriverResponse(
+    @SerializedName("MRData") var mRData: MRDataDto? = MRDataDto()
 )
 
-data class MRDataNetworkEntity(
+data class MRDataDto(
     @SerializedName("xmlns") var xmlns: String? = null,
     @SerializedName("series") var series: String? = null,
     @SerializedName("url") var url: String? = null,
     @SerializedName("limit") var limit: String? = null,
     @SerializedName("offset") var offset: String? = null,
     @SerializedName("total") var total: String? = null,
-    @SerializedName("DriverTable") var driverTable: DriverTableNetworkEntity? = DriverTableNetworkEntity()
+    @SerializedName("DriverTable") var driverTable: DriverTableDto? = DriverTableDto()
 )
 
-data class DriverTableNetworkEntity(
-    @SerializedName("Drivers") var drivers: ArrayList<DriversNetworkEntity> = arrayListOf()
+data class DriverTableDto(
+    @SerializedName("Drivers") var drivers: ArrayList<DriverDto> = arrayListOf()
 )
 
-data class DriversNetworkEntity(
+data class DriverDto(
     @SerializedName("driverId") var driverId: String,
     @SerializedName("url") var url: String? = null,
     @SerializedName("givenName") var givenName: String? = null,
