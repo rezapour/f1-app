@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -21,27 +20,30 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
-import me.rezapour.designsystem.theme.F1AppTheme
-import me.rezapour.domain.models.DriverDomain
-import me.rezapour.drivers.viewmodel.UIState
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemKey
+import me.rezapour.domain.models.Driver
+import me.rezapour.drivers.viewmodel.DriverListViewModel
 
 @Composable
 fun DriversScreen(
-    uiState: UIState,
-    onDriverClicked: (String) -> Unit
+    viewModel: DriverListViewModel = hiltViewModel(),
+    onDriverClicked: (String) -> Unit,
 ) {
-    ScreenContent(uiState, onDriverClicked)
+    val items = viewModel.drivers.collectAsLazyPagingItems()
+    ScreenContent(items, onDriverClicked)
 
 }
 
 @Composable
 fun ScreenContent(
-    uiState: UIState,
-    onDriverClicked: (String) -> Unit
+    items: LazyPagingItems<Driver>,
+    onDriverClicked: (String) -> Unit,
 ) {
 
     Scaffold(
@@ -64,17 +66,20 @@ fun ScreenContent(
                 .navigationBarsPadding()
         ) {
             items(
-                items = uiState.drivers,
-                key = { it.driverId }
-            ) { driver ->
-                DriverItem(
-                    modifier = Modifier.padding(4.dp),
-                    driverId = driver.driverId,
-                    name = "${driver.givenName} ${driver.familyName}",
-                    nationality = driver.nationality,
-                    dateOfBirth = driver.dateOfBirth,
-                    onDriverClicked = onDriverClicked
-                )
+                count = items.itemCount,
+                key = items.itemKey { it.driverId }
+            ) { index ->
+                val driver = items[index]
+                driver?.let {
+                    DriverItem(
+                        modifier = Modifier.padding(4.dp),
+                        driverId = driver.driverId,
+                        name = "${driver.givenName} ${driver.familyName}",
+                        nationality = driver.nationality,
+                        dateOfBirth = driver.dateOfBirth,
+                        onDriverClicked = onDriverClicked
+                    )
+                }
             }
         }
     }
@@ -87,7 +92,7 @@ private fun DriverItem(
     name: String,
     dateOfBirth: String,
     nationality: String,
-    onDriverClicked: (String) -> Unit
+    onDriverClicked: (String) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -112,24 +117,8 @@ private fun DriverItem(
     }
 }
 
-
-@Preview
-@Composable
-fun DriverListPreview() {
-    F1AppTheme {
-        ScreenContent(
-            uiState = UIState(
-                drivers = drivers,
-
-                )
-        ) {
-
-        }
-    }
-}
-
 val drivers = listOf(
-    DriverDomain(
+    Driver(
         driverId = "hamilton",
         url = "https://en.wikipedia.org/wiki/Lewis_Hamilton",
         givenName = "Lewis",
@@ -137,7 +126,7 @@ val drivers = listOf(
         dateOfBirth = "1985-01-07",
         nationality = "British"
     ),
-    DriverDomain(
+    Driver(
         driverId = "max_verstappen",
         url = "https://en.wikipedia.org/wiki/Max_Verstappen",
         givenName = "Max",
@@ -145,7 +134,7 @@ val drivers = listOf(
         dateOfBirth = "1997-09-30",
         nationality = "Dutch"
     ),
-    DriverDomain(
+    Driver(
         driverId = "leclerc",
         url = "https://en.wikipedia.org/wiki/Charles_Leclerc",
         givenName = "Charles",
@@ -153,7 +142,7 @@ val drivers = listOf(
         dateOfBirth = "1997-10-16",
         nationality = "Monégasque"
     ),
-    DriverDomain(
+    Driver(
         driverId = "norris",
         url = "https://en.wikipedia.org/wiki/Lando_Norris",
         givenName = "Lando",
@@ -161,7 +150,7 @@ val drivers = listOf(
         dateOfBirth = "1999-11-13",
         nationality = "British"
     ),
-    DriverDomain(
+    Driver(
         driverId = "alonso",
         url = "https://en.wikipedia.org/wiki/Fernando_Alonso",
         givenName = "Fernando",
@@ -169,7 +158,7 @@ val drivers = listOf(
         dateOfBirth = "1981-07-29",
         nationality = "Spanish"
     ),
-    DriverDomain(
+    Driver(
         driverId = "sainz",
         url = "https://en.wikipedia.org/wiki/Carlos_Sainz_Jr.",
         givenName = "Carlos",
@@ -177,7 +166,7 @@ val drivers = listOf(
         dateOfBirth = "1994-09-01",
         nationality = "Spanish"
     ),
-    DriverDomain(
+    Driver(
         driverId = "russell",
         url = "https://en.wikipedia.org/wiki/George_Russell_(racing_driver)",
         givenName = "George",
@@ -185,7 +174,7 @@ val drivers = listOf(
         dateOfBirth = "1998-02-15",
         nationality = "British"
     ),
-    DriverDomain(
+    Driver(
         driverId = "piastri",
         url = "https://en.wikipedia.org/wiki/Oscar_Piastri",
         givenName = "Oscar",
@@ -193,7 +182,7 @@ val drivers = listOf(
         dateOfBirth = "2001-04-06",
         nationality = "Australian"
     ),
-    DriverDomain(
+    Driver(
         driverId = "ricciardo",
         url = "https://en.wikipedia.org/wiki/Daniel_Ricciardo",
         givenName = "Daniel",
@@ -201,7 +190,7 @@ val drivers = listOf(
         dateOfBirth = "1989-07-01",
         nationality = "Australian"
     ),
-    DriverDomain(
+    Driver(
         driverId = "vettel",
         url = "https://en.wikipedia.org/wiki/Sebastian_Vettel",
         givenName = "Sebastian",

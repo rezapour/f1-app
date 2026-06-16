@@ -7,7 +7,7 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.9.1"
 activityCompose = "1.10.1"
-composeBom = "2024.09.00"
+composeBom = "2025.11.00"
 appcompat = "1.7.1"
 material = "1.12.0"
 kspVersion = "2.0.21-1.0.27"
@@ -25,6 +25,7 @@ junit5plugin = "1.9.3.0"
 assertj = "3.24.2"
 navigation = "2.8.0"
 hiltNavigationCompose = "1.2.0"
+paging_version = "3.3.6"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -63,6 +64,12 @@ dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", vers
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "daggerHiltVersion" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+
+#paging
+androidx-paging-runtime = {group ="androidx.paging",name="paging-runtime" ,version.ref="paging_version" }
+androidx-paging-common = {group ="androidx.paging",name="paging-common" ,version.ref="paging_version" }
+androidx-paging-compose = {group ="androidx.paging",name="paging-compose" ,version.ref="paging_version" }
 
 #test
 truth = { group = "com.google.truth", name = "truth", version.ref = "truthVersion" }

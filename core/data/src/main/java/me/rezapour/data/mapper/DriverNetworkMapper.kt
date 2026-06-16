@@ -1,12 +1,12 @@
 package me.rezapour.data.mapper
 
-import me.rezapour.domain.models.DriverDomain
-import me.rezapour.network.model.DriversNetworkEntity
+import me.rezapour.domain.models.Driver
+import me.rezapour.network.model.DriverDto
 import javax.inject.Inject
 
-class DriverNetworkMapper @Inject constructor() : Mapper<DriversNetworkEntity, DriverDomain> {
-    override fun map(input: DriversNetworkEntity): DriverDomain =
-        DriverDomain(
+class DriverNetworkMapper @Inject constructor() : Mapper<DriverDto, Driver> {
+    override fun map(input: DriverDto): Driver =
+        Driver(
             driverId = requireNotNull(input.driverId) { "driverId cannot be null" },
             url = input.url ?: "",
             givenName = input.givenName ?: "Unknown",
@@ -16,7 +16,7 @@ class DriverNetworkMapper @Inject constructor() : Mapper<DriversNetworkEntity, D
         )
 
 
-    override fun map(inputs: List<DriversNetworkEntity>): List<DriverDomain> =
+    override fun map(inputs: List<DriverDto>): List<Driver> =
         inputs.map { map(it) }
 
 }

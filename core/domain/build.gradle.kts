@@ -53,6 +53,10 @@ dependencies {
     implementation(libs.bundles.coroutines)
     testImplementation(libs.kotlinx.coroutines.test)
 
+    //paging
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.common)
+
     testImplementation(libs.bundles.junit5)
     testRuntimeOnly(libs.junit5.engine)
 }
