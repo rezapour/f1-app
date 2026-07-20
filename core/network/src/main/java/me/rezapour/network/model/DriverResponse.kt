@@ -1,30 +1,35 @@
 package me.rezapour.network.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class DriverResponse(
-    @SerializedName("MRData") var mRData: MRDataDto? = MRDataDto()
+    @SerialName("MRData") var mRData: MRDataDto? = MRDataDto(),
 )
 
+@Serializable
 data class MRDataDto(
-    @SerializedName("xmlns") var xmlns: String? = null,
-    @SerializedName("series") var series: String? = null,
-    @SerializedName("url") var url: String? = null,
-    @SerializedName("limit") var limit: String? = null,
-    @SerializedName("offset") var offset: String? = null,
-    @SerializedName("total") var total: String? = null,
-    @SerializedName("DriverTable") var driverTable: DriverTableDto? = DriverTableDto()
+    var xmlns: String? = null,
+    var series: String? = null,
+    var url: String? = null,
+    var limit: String? = null,
+    var offset: String? = null,
+    var total: String? = null,
+    @SerialName("DriverTable") var driverTable: DriverTableDto? = DriverTableDto(),
 )
 
+@Serializable
 data class DriverTableDto(
-    @SerializedName("Drivers") var drivers: ArrayList<DriverDto> = arrayListOf()
+    @SerialName("Drivers") var drivers: ArrayList<DriverDto> = arrayListOf(),
 )
 
+@Serializable
 data class DriverDto(
-    @SerializedName("driverId") var driverId: String,
-    @SerializedName("url") var url: String? = null,
-    @SerializedName("givenName") var givenName: String? = null,
-    @SerializedName("familyName") var familyName: String? = null,
-    @SerializedName("dateOfBirth") var dateOfBirth: String? = null,
-    @SerializedName("nationality") var nationality: String? = null
+    var driverId: String,
+    var url: String? = null,
+    var givenName: String? = null,
+    var familyName: String? = null,
+    var dateOfBirth: String? = null,
+    var nationality: String? = null,
 )

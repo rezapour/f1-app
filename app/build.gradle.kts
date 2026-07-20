@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt)
@@ -8,12 +7,12 @@ plugins {
 
 android {
     namespace = "me.rezapour.f1app"
-    compileSdk = 35
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "me.rezapour.f1app"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -30,12 +29,10 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
+
     buildFeatures {
         compose = true
     }
@@ -56,7 +53,10 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.navigation.compose)
+    implementation(libs.hilt.navigation.compose)
     testImplementation(libs.junit)
+    testImplementation(libs.navigation.testing)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -64,11 +64,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-
     //dagger
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.compiler)
-
-    //navigation
-    implementation(libs.bundles.navigation)
 }

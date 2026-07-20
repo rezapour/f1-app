@@ -1,12 +1,12 @@
 package me.rezapour.network.impl
 
-import com.google.gson.JsonSyntaxException
 import me.rezapour.network.ApiProvider
 import me.rezapour.network.NetworkException
 import me.rezapour.network.model.ConstructorsNetworkEntity
 import me.rezapour.network.model.DriverResponse
 import me.rezapour.network.retrofit.ApiService
 import retrofit2.HttpException
+import java.io.IOException
 import javax.inject.Inject
 
 class ApiProviderRetrofitImpl @Inject constructor(private val api: ApiService) : ApiProvider {
@@ -38,9 +38,7 @@ private suspend fun <T> safeApiCall(block: suspend () -> T): T {
             401 -> NetworkException.Unauthorised()
             else -> NetworkException.HttpError(e.code())
         }
-    } catch (e: JsonSyntaxException) {
-        throw NetworkException.BodyIsCorrupted(e)
-    } catch (e: Exception) {
+    } catch (e: IOException) {
         throw NetworkException.NoInternet(e)
     }
 }
