@@ -1,33 +1,38 @@
 package me.rezapour.network.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 class ConstructorsNetworkEntity {
-    @SerializedName("MRData")
-    var MRData: MRDataConstructorsNetworkEntity? = MRDataConstructorsNetworkEntity()
+    @SerialName("MRData")
+    var mrData: MRDataConstructorsNetworkEntity? = MRDataConstructorsNetworkEntity()
 }
 
+@Serializable
 data class MRDataConstructorsNetworkEntity(
 
-    @SerializedName("xmlns") var xmlns: String? = null,
-    @SerializedName("series") var series: String? = null,
-    @SerializedName("url") var url: String? = null,
-    @SerializedName("limit") var limit: String? = null,
-    @SerializedName("offset") var offset: String? = null,
-    @SerializedName("total") var total: String? = null,
-    @SerializedName("ConstructorTable") var ConstructorTable: ConstructorTable? = ConstructorTable()
+    var xmlns: String? = null,
+    var series: String? = null,
+    var url: String? = null,
+    var limit: String? = null,
+    var offset: String? = null,
+    var total: String? = null,
+    @SerialName("ConstructorTable") var constructorTable: ConstructorTable? = ConstructorTable(),
 
-)
+    )
 
+@Serializable
 data class ConstructorTable(
-    @SerializedName("season") var season: String? = null,
-    @SerializedName("Constructors") var Constructors: List<ConstructorNetworkEntity> = arrayListOf()
+    var season: String? = null,
+    @SerialName("Constructors") var constructors: List<ConstructorNetworkEntity> = arrayListOf(),
 )
 
+@Serializable
 data class ConstructorNetworkEntity(
-    @SerializedName("constructorId") var constructorId: String? = null,
-    @SerializedName("url") var url: String? = null,
-    @SerializedName("name") var name: String,
-    @SerializedName("nationality") var nationality: String? = null
+    var constructorId: String? = null,
+    var url: String? = null,
+    var name: String,
+    var nationality: String? = null,
 )
 

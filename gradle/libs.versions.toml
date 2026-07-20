@@ -1,31 +1,33 @@
 [versions]
-agp = "8.12.0"
-kotlin = "2.0.21"
-coreKtx = "1.16.0"
+agp = "9.3.0"
+compileSdk = "37"
+targetSdk = "37"
+kotlin = "2.4.10"
+coreKtx = "1.19.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.9.1"
-activityCompose = "1.10.1"
-composeBom = "2025.11.00"
+lifecycleRuntimeKtx = "2.11.0"
+activityCompose = "1.13.0"
+composeBom = "2026.06.01"
 appcompat = "1.7.1"
-material = "1.12.0"
-kspVersion = "2.0.21-1.0.27"
-daggerHiltVersion = "2.56.2"
+material = "1.14.0"
+kspVersion = "2.3.10"
+daggerHiltVersion = "2.60.1"
 retrofitVersion = "3.0.0"
-gsonVersion = "2.13.1"
-kotlinxCoroutines = "1.10.1"
-okhttpVersion = "4.12.0"
-okhttpMockVersion = "4.12.0"
-truthVersion = "1.4.4"
-mockkVersion = "1.13.7"
-kotlinTestJunit = "1.9.24"
-junit5 = "5.10.0"
-junit5plugin = "1.9.3.0"
+kotlinxCoroutines = "1.11.0"
+okhttpVersion = "5.4.0"
+okhttpMockVersion = "5.4.0"
+truthVersion = "1.4.5"
+mockkVersion = "1.14.11"
+kotlinTestJunit = "2.4.10"
+junit5 = "6.1.2"
+junit5plugin = "2.0.1"
 assertj = "3.24.2"
-navigation = "2.8.0"
+navigation = "2.9.8"
 hiltNavigationCompose = "1.2.0"
-paging_version = "3.3.6"
+paging_version = "3.5.0"
+kotlinxSerialization = "1.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -53,11 +55,11 @@ hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", ve
 
 #network
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gsonVersion" }
-gson-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
 okhttp-mock-server = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okhttpMockVersion" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+json-converter = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofitVersion" }
 
 #dagger
 dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHiltVersion" }
@@ -89,16 +91,17 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "daggerHiltVersion" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "junit5plugin" }
+junit5 = { id = "de.mannodermaus.android-junit", version.ref = "junit5plugin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 [bundles]
 network = [
     "retrofit",
-    "gson",
-    "gson-converter",
     "okhttp",
     "okhttp-logging-interceptor",
-    "okhttp-mock-server"
+    "okhttp-mock-server",
+    "kotlinx-serialization-json",
+    "json-converter"
 ]
 
 coroutines = [

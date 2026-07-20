@@ -1,5 +1,6 @@
 package me.rezapour.data.pagin
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import me.rezapour.data.mapper.Mapper
@@ -19,6 +20,7 @@ class DriverListPagingSource(
         try {
             var currentOffset = params.key ?: 0
             val response = api.getDrivers(offset = currentOffset, limit = params.loadSize)
+            Log.d("XXRR",response.mRData?.driverTable?.drivers.toString())
             val drivers = mapper.map(
                 response.mRData?.driverTable?.drivers
                     ?: throw IOException("Drivers is null")
