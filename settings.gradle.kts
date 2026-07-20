@@ -21,3 +21,11 @@ dependencyResolutionManagement {
 
 rootProject.name = "F1App"
 include(":app")
+include(":core:network")
+include(":core:data")
+include(":core:domain")
+include(":core:common")
+include(":core:di")
+include(":feature:drivers")
+include(":core:designsystem")
+include(":feature:constructors")
