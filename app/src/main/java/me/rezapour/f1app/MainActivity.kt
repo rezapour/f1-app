@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import dagger.hilt.android.AndroidEntryPoint
-import me.rezapour.designsystem.theme.F1AppTheme
+import me.rezapour.designsystem.theme.SpaTheme
 import me.rezapour.drivers.compse.DriversScreen
 
 @AndroidEntryPoint
@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            F1AppTheme {
+            SpaTheme {
                 DriversScreen() { }
             }
         }
